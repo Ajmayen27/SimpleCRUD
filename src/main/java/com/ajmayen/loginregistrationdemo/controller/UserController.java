@@ -2,12 +2,11 @@ package com.ajmayen.loginregistrationdemo.controller;
 
 import com.ajmayen.loginregistrationdemo.model.User;
 import com.ajmayen.loginregistrationdemo.service.UserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,11 +20,14 @@ public class UserController {
     }
 
 
+
     @PostMapping("/register")
     public ResponseEntity<User> registerUser(@RequestBody User user){
         User registeredUser = userService.registerUser(user);
         return ResponseEntity.ok(registeredUser);
     }
+
+
 
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody User user){
@@ -35,6 +37,27 @@ public class UserController {
         }
         return ResponseEntity.status(401).body("Invalid user or password");
     }
+
+
+
+    @PutMapping("/update/{id}")
+    public User updateUser(@PathVariable int id,@RequestBody User user){
+        return userService.updateUser(id,user);
+    }
+
+
+
+    @GetMapping("/allUsers")
+    public List<User> getAllUser(){
+        return userService.getAllUser();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable int id){
+        userService.deleteUser(id);
+        return ResponseEntity.ok("Successfully Deleted");
+    }
+
 
 
 }
