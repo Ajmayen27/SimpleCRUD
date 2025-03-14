@@ -1,7 +1,7 @@
-package com.ajmayen.loginregistrationdemo.controller;
+package com.ajmayen.loginRegistrationPortal.controller;
 
-import com.ajmayen.loginregistrationdemo.model.User;
-import com.ajmayen.loginregistrationdemo.service.UserService;
+import com.ajmayen.loginRegistrationPortal.model.User;
+import com.ajmayen.loginRegistrationPortal.service.UserService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

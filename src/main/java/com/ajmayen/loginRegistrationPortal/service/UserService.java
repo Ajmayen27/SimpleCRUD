@@ -1,7 +1,8 @@
-package com.ajmayen.loginregistrationdemo.service;
+package com.ajmayen.loginRegistrationPortal.service;
 
-import com.ajmayen.loginregistrationdemo.model.User;
-import com.ajmayen.loginregistrationdemo.repository.UserRepository;
+import com.ajmayen.loginRegistrationPortal.model.User;
+import com.ajmayen.loginRegistrationPortal.repository.UserRepository;
+import com.ajmayen.loginRegistrationPortal.util.CaesarCypher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,23 +13,26 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+
+    public UserService(UserRepository userRepository) {
+
+        this.userRepository = userRepository;
+    }
+
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
 
     public User registerUser(User user){
+        user.setPassword(CaesarCypher.encrypt(user.getPassword()));
         return userRepository.save(user);
     }
 
 
     public Optional<User> loginUser(String username,String password){
         return userRepository.findByUsername(username)
-                .filter(user -> user.getPassword().equals(password));
+                .filter(user -> CaesarCypher.decrypt(user.getPassword()).equals(password));
     }
 
 
@@ -37,12 +41,13 @@ public class UserService {
         User userToUpdate = userRepository.findById(id).orElseThrow();
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setPassword(CaesarCypher.encrypt(user.getPassword())) ;
         return userRepository.save(userToUpdate);
     }
 
 
     public void deleteUser(Integer id){
+
         userRepository.deleteById(id);
     }
 

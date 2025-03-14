@@ -1,4 +1,4 @@
-package com.ajmayen.loginregistrationdemo.model;
+package com.ajmayen.loginRegistrationPortal.model;
 
 import jakarta.persistence.*;
 import lombok.*;

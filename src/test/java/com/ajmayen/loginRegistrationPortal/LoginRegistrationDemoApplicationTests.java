@@ -1,4 +1,4 @@
-package com.ajmayen.loginregistrationdemo;
+package com.ajmayen.loginRegistrationPortal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

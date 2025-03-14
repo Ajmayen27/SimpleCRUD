@@ -1,8 +1,7 @@
-package com.ajmayen.loginregistrationdemo.repository;
+package com.ajmayen.loginRegistrationPortal.repository;
 
-import com.ajmayen.loginregistrationdemo.model.User;
+import com.ajmayen.loginRegistrationPortal.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
